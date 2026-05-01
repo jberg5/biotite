@@ -703,7 +703,7 @@ cdef class CellList:
     @cython.wraparound(False)
     @cython.cdivision(True)
     cdef inline void _get_cell_index(self, float32 x, float32 y, float32 z,
-                             int* i, int* j, int* k):
+                             int* i, int* j, int* k) noexcept:
         i[0] = <int>((x - self._min_coord[0]) / self._cellsize)
         j[0] = <int>((y - self._min_coord[1]) / self._cellsize)
         k[0] = <int>((z - self._min_coord[2]) / self._cellsize)
@@ -845,7 +845,9 @@ def _prepare_vectorization(np.ndarray coord, radius, radius_dtype):
     return coord, radius, is_multi_coord, is_multi_radius
 
 
-cdef inline void deallocate_ptrs(ptr[:,:,:] ptrs):
+@cython.boundscheck(False)
+@cython.wraparound(False)
+cdef inline void deallocate_ptrs(ptr[:,:,:] ptrs) noexcept:
     cdef int i, j, k
     cdef int* cell_ptr
     # Free cell pointers
@@ -857,7 +859,7 @@ cdef inline void deallocate_ptrs(ptr[:,:,:] ptrs):
 
 
 cdef inline float32 squared_distance(float32 x1, float32 y1, float32 z1,
-                    float32 x2, float32 y2, float32 z2):
+                    float32 x2, float32 y2, float32 z2) noexcept:
     cdef float32 diff_x = x2 - x1
     cdef float32 diff_y = y2 - y1
     cdef float32 diff_z = z2 - z1

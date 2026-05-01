@@ -885,8 +885,8 @@ def _extend_table(table, int dimension, int64 max_size):
     return new_table
 
 
-cdef inline int _min(int32 a, int32 b):
+cdef inline int _min(int32 a, int32 b) noexcept:
     return a if a < b else b
 
-cdef inline int _max(int32 a, int32 b):
+cdef inline int _max(int32 a, int32 b) noexcept:
     return a if a > b else b

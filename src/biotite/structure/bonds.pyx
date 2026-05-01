@@ -1395,7 +1395,7 @@ def _to_index_array(object index, uint32 length):
         return all_indices[index]
 
 
-cdef inline bint _in_array(uint32* array, uint32 atom_index, int array_length):
+cdef inline bint _in_array(uint32* array, uint32 atom_index, int array_length) noexcept:
     """
     Test whether a value (`atom_index`) is in a C-array `array`.
     """
@@ -1408,7 +1408,7 @@ cdef inline bint _in_array(uint32* array, uint32 atom_index, int array_length):
     return False
 
 
-cdef inline void _sort(uint32* index1_ptr, uint32* index2_ptr):
+cdef inline void _sort(uint32* index1_ptr, uint32* index2_ptr) noexcept:
     cdef uint32 swap
     if index1_ptr[0] > index2_ptr[0]:
         # Swap indices

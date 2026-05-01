@@ -300,7 +300,7 @@ def sasa(array, float probe_radius=1.4, np.ndarray atom_filter=None,
 
 
 cdef inline float32 distance_sq(float32 x1, float32 y1, float32 z1,
-                        float32 x2, float32 y2, float32 z2):
+                        float32 x2, float32 y2, float32 z2) noexcept:
     cdef float32 dx = x2 - x1
     cdef float32 dy = y2 - y1
     cdef float32 dz = z2 - z1

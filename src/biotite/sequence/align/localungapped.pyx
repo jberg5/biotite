@@ -275,5 +275,5 @@ cdef int _seed_extend_uint8(uint8[:] code1, uint8[:] code2,
     return i_max_score + 1
 
 
-cdef inline int _min(int a, int b):
+cdef inline int _min(int a, int b) noexcept:
     return a if a < b else b
